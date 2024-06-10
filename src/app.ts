@@ -60,6 +60,7 @@ class Application {
         // })
 
         this._instance.use('/webPanel*', (req, res) => {
+            console.log("ismeaaya2")
             if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                 let url = (req.url.split('?')[0]).replace('/webPanel', '')
                 res.sendFile(path.resolve(__dirname, "../build", "index.html"));
@@ -122,11 +123,14 @@ class Application {
             });
 
             app.get('/webPanel*', (req: any, res: any) => {
+
+                console.log("ismeaaya1")
+
                 if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                     let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'happytaxi-admin', url)));
+                    res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', url)));
                 } else
-                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'happytaxi-admin', 'build', 'index.html')));
+                    res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', 'build', 'index.html')));
 
             });
 
