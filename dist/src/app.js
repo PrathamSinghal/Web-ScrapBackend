@@ -68,6 +68,14 @@ class Application {
                 routes.forEach((routePath) => {
                     require(routePath).getRouter(app); // eslint-disable-line
                 });
+                app.get('/webPanel*', (req, res) => {
+                    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+                        let url = (req.url.split('?')[0]).replace('/webPanel', '');
+                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'happytaxi-admin', url)));
+                    }
+                    else
+                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'happytaxi-admin', 'build', 'index.html')));
+                });
             });
         };
         this._instance = (0, express_1.default)();
@@ -87,6 +95,14 @@ class Application {
         //     console.log(cdr);
         //     res.send('got it');
         // })
+        this._instance.use('/webPanel*', (req, res) => {
+            if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+                let url = (req.url.split('?')[0]).replace('/webPanel', '');
+                res.sendFile(path_1.default.resolve(__dirname, "../build", "index.html"));
+            }
+            else
+                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '../build/index.html')));
+        });
         this._instance.use('/apiDoc', express_1.default.static(path_1.default.resolve(__dirname, "doc/")));
         this._instance.use('/api/user/', user_routes_1.userRoutes);
         this._instance.use(function (req, res, next) {

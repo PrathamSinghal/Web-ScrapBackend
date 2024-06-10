@@ -59,6 +59,16 @@ class Application {
         
         // })
 
+        this._instance.use('/webPanel*', (req, res) => {
+            if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+                let url = (req.url.split('?')[0]).replace('/webPanel', '')
+                res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+            } else
+
+                res.sendFile(path.resolve(path.join(__dirname, '../build/index.html')));
+
+        })
+
         
         this._instance.use('/apiDoc', express.static(path.resolve(__dirname, "doc/")));
         this._instance.use('/api/user/', userRoutes)
@@ -109,6 +119,15 @@ class Application {
             }
             routes.forEach((routePath: any) => {
                 require(routePath).getRouter(app); // eslint-disable-line
+            });
+
+            app.get('/webPanel*', (req: any, res: any) => {
+                if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+                    let url = (req.url.split('?')[0]).replace('/webPanel', '')
+                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'happytaxi-admin', url)));
+                } else
+                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'happytaxi-admin', 'build', 'index.html')));
+
             });
 
         });
