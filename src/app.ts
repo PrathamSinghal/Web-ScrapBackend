@@ -60,13 +60,15 @@ class Application {
         // })
 
         this._instance.use('/webPanel*', (req, res) => {
-            console.log("ismeaaya2")
+            console.log("ismeaaya2");
+            console.log(__dirname,"__dirname");
+            console.log(path.join(__dirname, '..', 'Web-Scraper'),"path.join(__dirname, '..', 'Web-Scraper', url)");
 
             if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                 let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', url)));
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
             } else
-                res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', 'build', 'index.html')));
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
 
         })
