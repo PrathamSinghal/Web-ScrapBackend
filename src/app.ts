@@ -59,7 +59,7 @@ class Application {
         
         // })
 
-        this._instance.use('/webPanel*', (req, res) => {
+        this._instance.use('*', (req, res) => {
             console.log("ismeaaya2");
             console.log(__dirname,"__dirname");
             console.log(path.join(__dirname, '..', 'Web-Scraper'),"path.join(__dirname, '..', 'Web-Scraper', url)");
@@ -125,7 +125,7 @@ class Application {
                 require(routePath).getRouter(app); // eslint-disable-line
             });
 
-            app.get('/webPanel*', (req: any, res: any) => {
+            app.get('*', (req: any, res: any) => {
 
                 console.log("ismeaaya1")
 
