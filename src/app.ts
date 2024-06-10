@@ -61,12 +61,13 @@ class Application {
 
         this._instance.use('/webPanel*', (req, res) => {
             console.log("ismeaaya2")
+
             if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                 let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+                res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', url)));
             } else
+                res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', 'build', 'index.html')));
 
-                res.sendFile(path.resolve(path.join(__dirname, '../build/index.html')));
 
         })
 
