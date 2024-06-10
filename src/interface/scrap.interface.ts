@@ -1,0 +1,15 @@
+export  interface scrap {
+    name?:String,
+    companyName?:String,
+    description?:String,
+    logo?:String,
+    facebook?:String,
+    linkedin?:String,
+    twitter?:String,
+    instagram?:String,
+    address?:String,
+    phone?:String,
+    emails?:String,
+    webUrl?:String,
+    screenshot?:String,
+}
