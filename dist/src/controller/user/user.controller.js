@@ -52,7 +52,10 @@ class userController {
                 let { webUrl } = req.body;
                 console.log(webUrl, "webUrl");
                 // Launch the browser and open a new blank page
-                const browser = yield puppeteer_1.default.launch();
+                const browser = yield puppeteer_1.default.launch({
+                    executablePath: '/usr/bin/chromium-browser',
+                    args: ['--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote']
+                });
                 const page = yield browser.newPage();
                 // Navigate the page to a URL
                 yield page.goto(webUrl);
