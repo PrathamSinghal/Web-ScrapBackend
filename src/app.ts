@@ -73,7 +73,7 @@ class Application {
             console.log(req.baseUrl,"baseUrl")
 
             if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
-                let url = (req.baseUrl.split('?')[0]).replace('/websiteDetails', '')
+                let url = (req.baseUrl).replace('/websiteDetails', '')
                 console.log(req.baseUrl,"baseUrl1")
 
                 console.log(url,"finalurl")
