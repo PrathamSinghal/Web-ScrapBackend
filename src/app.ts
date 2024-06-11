@@ -66,6 +66,9 @@ class Application {
 
             if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                 let url = (req.url.split('?')[0]).replace('/webPanel', '')
+
+                console.log(url,"finalurl")
+
                 res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
             } else
                 res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));

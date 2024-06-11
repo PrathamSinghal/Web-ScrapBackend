@@ -102,6 +102,7 @@ class Application {
             console.log(path_1.default.join(__dirname, '..', 'Web-Scraper'), "path.join(__dirname, '..', 'Web-Scraper', url)");
             if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                 let url = (req.url.split('?')[0]).replace('/webPanel', '');
+                console.log(url, "finalurl");
                 res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
             }
             else
