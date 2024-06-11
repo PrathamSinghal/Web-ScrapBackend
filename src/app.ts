@@ -73,12 +73,12 @@ class Application {
             console.log(req.baseUrl,"baseUrl")
 
             if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
-                let url = (req.url.split('?')[0]).replace('/webPanel', '')
+                let url = (req.baseUrl.split('?')[0]).replace('/websiteDetails', '')
                 console.log(req.baseUrl,"baseUrl1")
 
                 console.log(url,"finalurl")
 
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', url)));
             } else
                 res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
