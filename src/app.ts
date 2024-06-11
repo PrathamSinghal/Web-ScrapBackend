@@ -72,7 +72,7 @@ class Application {
 
                 console.log(url,"finalurl")
 
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', req.baseUrl)));
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
             } else
                 res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
@@ -138,7 +138,7 @@ class Application {
 
                 if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                     let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
+                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', url)));
                 } else
                     res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
