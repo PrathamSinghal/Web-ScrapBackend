@@ -99,6 +99,21 @@ class Application {
         // })
         this._instance.use('/apiDoc', express_1.default.static(path_1.default.resolve(__dirname, "doc/")));
         this._instance.use('/api/user/', user_routes_1.userRoutes);
+        this._instance.use('*', (req, res) => {
+            console.log("ismeaaya2");
+            console.log(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper'), "path.joi");
+            console.log(req, "request");
+            console.log(req.url, "requesturl");
+            console.log(req.baseUrl, "baseUrl");
+            if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
+                let url = (req.url.split('?')[0]).replace('/webPanel', '');
+                console.log(req.baseUrl, "baseUrl1");
+                console.log(url, "finalurl");
+                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
+            }
+            else
+                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
+        });
         this._instance.use(function (req, res, next) {
             // Website you wish to allow to connect
             res.setHeader('Access-Control-Allow-Origin', '*');
@@ -120,21 +135,6 @@ class Application {
         this._instance.use((req, res, next) => {
             res.status(404).json(responseMessage_1.resObj.pageNotFound(req.originalUrl));
             Logger_1.logger.error(`400 || ${res.statusMessage} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
-        });
-        this._instance.use('*', (req, res) => {
-            console.log("ismeaaya2");
-            console.log(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper'), "path.joi");
-            console.log(req, "request");
-            console.log(req.url, "requesturl");
-            console.log(req.baseUrl, "baseUrl");
-            if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
-                let url = (req.url.split('?')[0]).replace('/webPanel', '');
-                console.log(req.baseUrl, "baseUrl1");
-                console.log(url, "finalurl");
-                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
-            }
-            else
-                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
         });
     }
     get instance() {

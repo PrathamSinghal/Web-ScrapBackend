@@ -64,6 +64,26 @@ class Application {
         
         this._instance.use('/apiDoc', express.static(path.resolve(__dirname, "doc/")));
         this._instance.use('/api/user/', userRoutes)
+        
+        this._instance.use('*', (req, res) => {
+            console.log("ismeaaya2");
+            console.log(path.join(__dirname, '..', '..', '..', 'Web-Scraper'),"path.joi");
+            console.log(req,"request")
+            console.log(req.url,"requesturl")
+            console.log(req.baseUrl,"baseUrl")
+
+            if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
+                let url = (req.url.split('?')[0]).replace('/webPanel', '')
+                console.log(req.baseUrl,"baseUrl1")
+
+                console.log(url,"finalurl")
+
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
+            } else
+                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
+
+
+        })
 
        
         this._instance.use(function (req, res, next) {
@@ -97,26 +117,7 @@ class Application {
             logger.error(`400 || ${res.statusMessage} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
         })
 
-        this._instance.use('*', (req, res) => {
-            console.log("ismeaaya2");
-            console.log(path.join(__dirname, '..', '..', '..', 'Web-Scraper'),"path.joi");
-            console.log(req,"request")
-            console.log(req.url,"requesturl")
-            console.log(req.baseUrl,"baseUrl")
-
-            if (allowedExt.filter(ext => req.baseUrl.indexOf(ext) > 0).length > 0) {
-                let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                console.log(req.baseUrl,"baseUrl1")
-
-                console.log(url,"finalurl")
-
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', req.baseUrl)));
-            } else
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
-
-
-        })
-
+        
 
     }
 
