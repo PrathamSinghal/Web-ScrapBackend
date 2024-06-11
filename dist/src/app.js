@@ -69,13 +69,14 @@ class Application {
                     require(routePath).getRouter(app); // eslint-disable-line
                 });
                 app.get('*', (req, res) => {
-                    console.log("ismeaaya1");
+                    console.log(req, "ismeaaya1");
+                    console.log(req.url, "req.url");
                     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                         let url = (req.url.split('?')[0]).replace('/webPanel', '');
-                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', 'Web-Scraper', url)));
+                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
                     }
                     else
-                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', 'Web-Scraper', 'build', 'index.html')));
+                        res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
                 });
             });
         };
@@ -96,19 +97,18 @@ class Application {
         //     console.log(cdr);
         //     res.send('got it');
         // })
-        this._instance.use('*', (req, res) => {
-            console.log("ismeaaya2");
-            console.log(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper'), "path.joi");
-            console.log(req, "request");
-            console.log(req.url, "requesturl");
-            if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-                let url = (req.url.split('?')[0]).replace('/webPanel', '');
-                console.log(url, "finalurl");
-                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
-            }
-            else
-                res.sendFile(path_1.default.resolve(path_1.default.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
-        });
+        // this._instance.use('*', (req, res) => {
+        //     console.log("ismeaaya2");
+        //     console.log(path.join(__dirname, '..', '..', '..', 'Web-Scraper'),"path.joi");
+        //     console.log(req,"request")
+        //     console.log(req.url,"requesturl")
+        //     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+        //         let url = (req.url.split('?')[0]).replace('/webPanel', '')
+        //         console.log(url,"finalurl")
+        //         res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
+        //     } else
+        //         res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
+        // })
         this._instance.use('/apiDoc', express_1.default.static(path_1.default.resolve(__dirname, "doc/")));
         this._instance.use('/api/user/', user_routes_1.userRoutes);
         this._instance.use(function (req, res, next) {

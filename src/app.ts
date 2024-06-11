@@ -59,23 +59,23 @@ class Application {
         
         // })
 
-        this._instance.use('*', (req, res) => {
-            console.log("ismeaaya2");
-            console.log(path.join(__dirname, '..', '..', '..', 'Web-Scraper'),"path.joi");
-            console.log(req,"request")
-            console.log(req.url,"requesturl")
+        // this._instance.use('*', (req, res) => {
+        //     console.log("ismeaaya2");
+        //     console.log(path.join(__dirname, '..', '..', '..', 'Web-Scraper'),"path.joi");
+        //     console.log(req,"request")
+        //     console.log(req.url,"requesturl")
 
-            if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-                let url = (req.url.split('?')[0]).replace('/webPanel', '')
+        //     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+        //         let url = (req.url.split('?')[0]).replace('/webPanel', '')
 
-                console.log(url,"finalurl")
+        //         console.log(url,"finalurl")
 
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
-            } else
-                res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
+        //         res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
+        //     } else
+        //         res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
 
-        })
+        // })
 
         
         this._instance.use('/apiDoc', express.static(path.resolve(__dirname, "doc/")));
@@ -131,13 +131,14 @@ class Application {
 
             app.get('*', (req: any, res: any) => {
 
-                console.log("ismeaaya1")
+                console.log(req,"ismeaaya1")
+                console.log(req.url,"req.url")
 
                 if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
                     let url = (req.url.split('?')[0]).replace('/webPanel', '')
-                    res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', url)));
+                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', url)));
                 } else
-                    res.sendFile(path.resolve(path.join(__dirname, '..', 'Web-Scraper', 'build', 'index.html')));
+                    res.sendFile(path.resolve(path.join(__dirname, '..', '..', '..', 'Web-Scraper', 'build', 'index.html')));
 
             });
 
